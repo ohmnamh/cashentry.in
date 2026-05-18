@@ -294,40 +294,6 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
 .popup-text{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:22px;}
 .popup-close{background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:100px;padding:12px 28px;color:var(--white);font-size:14px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;}
 
-
-/* GOOGLE FORM IFRAME */
-.gform-wrap{
-  position:relative;
-  border-radius:12px;
-  overflow:hidden;
-  margin-top:0;
-  background:rgba(255,255,255,0.02);
-  border:1px solid rgba(13,142,207,0.15);
-  border-radius:12px;
-}
-.gform-iframe{
-  border-radius:12px;
-  background:transparent;
-  display:block;
-  min-height:900px;
-  filter:invert(1) hue-rotate(180deg);
-  border:none;
-}
-.gform-loading{
-  display:none;
-  position:absolute;
-  inset:0;
-  background:rgba(7,21,35,0.9);
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:12px;
-  border-radius:12px;
-}
-.gform-spinner{{font-size:32px;animation:spin 1s linear infinite;}}
-@keyframes spin{{0%{{transform:rotate(0deg);}}100%{{transform:rotate(360deg);}}}}
-.gform-loading-text{{font-size:14px;color:var(--gray);}}
-
 /* RESPONSIVE */
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;padding-top:90px;}
@@ -394,43 +360,97 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
       <div class="form-bar"></div>
       <div class="form-heading">Apni Zaroorat Batayein</div>
       <div class="form-sub">Free · 2 minutes · No spam calls · Data 100% protected</div>
-
-      <!-- DATA VAULT MINI -->
-      <div class="dmini">
-        <div class="dmini-t">🔐 Data Vault — Aapka Data Sirf Aapka Hai</div>
-        <div class="dmini-r"><span>🚫</span><span>Aapka data kabhi bhi kisi ko nahi becha jayega</span></div>
-        <div class="dmini-r"><span>📵</span><span>WhatsApp "STOP CALLS" — calls turant band</span></div>
-        <div class="dmini-r"><span>🗑️</span><span>WhatsApp "DELETE MY DATA" — 48 ghante mein hata denge</span></div>
-      </div>
-
-      <!-- GOOGLE FORM EMBED -->
-      <div class="gform-wrap">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLScWFGsDIEcoLeGppTFJnkkNZkwwvt09GGzmGGUzfInO9D6Idg/viewform?embedded=true"
-          width="100%"
-          height="900"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          scrolling="no"
-          class="gform-iframe"
-          loading="lazy"
-          title="CashEntry.in Loan Inquiry Form">
-          Loading form...
-        </iframe>
-        <div class="gform-loading" id="gform-loading">
-          <div class="gform-spinner">⏳</div>
-          <div class="gform-loading-text">Loading secure form...</div>
+      <form onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div class="fg"><label>Full Name</label><input type="text" placeholder="Aapka naam" required></div>
+          <div class="fg"><label>Mobile Number</label><input type="tel" placeholder="10-digit number" maxlength="10" required></div>
         </div>
-      </div>
-
-      <!-- STOP CALLS STRIP -->
+        <div class="frow">
+          <div class="fg"><label>Company / Employer</label><input type="text" placeholder="Kahan kaam karte hain" required></div>
+          <div class="fg"><label>Monthly Salary (₹)</label>
+            <select required>
+              <option value="">Select salary</option>
+              <option>Below ₹15,000</option>
+              <option>₹15,000 – ₹25,000</option>
+              <option>₹25,000 – ₹40,000</option>
+              <option>₹40,000 – ₹60,000</option>
+              <option>₹60,000 – ₹1 Lakh</option>
+              <option>Above ₹1 Lakh</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Loan Type</label>
+            <select required>
+              <option value="">Select loan type</option>
+              <option>Personal Loan</option>
+              <option>Business Loan</option>
+              <option>Balance Transfer</option>
+              <option>Flexi Loan / Line of Credit</option>
+            </select>
+          </div>
+          <div class="fg"><label>Loan Amount Required</label>
+            <select required>
+              <option value="">Select amount</option>
+              <option>Up to ₹1 Lakh</option>
+              <option>₹1–5 Lakh</option>
+              <option>₹5–10 Lakh</option>
+              <option>₹10–25 Lakh</option>
+              <option>₹25–50 Lakh</option>
+              <option>₹50 Lakh – 1 Cr</option>
+              <option>Above ₹1 Cr</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Existing Loans Running</label>
+            <select>
+              <option>No existing loans</option>
+              <option>1 loan</option>
+              <option>2 loans</option>
+              <option>3 loans</option>
+              <option>4+ loans</option>
+            </select>
+          </div>
+          <div class="fg"><label>Total Monthly EMI (₹)</label>
+            <select>
+              <option>No EMI</option>
+              <option>Below ₹5,000</option>
+              <option>₹5,000 – ₹10,000</option>
+              <option>₹10,000 – ₹20,000</option>
+              <option>₹20,000 – ₹40,000</option>
+              <option>Above ₹40,000</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>📞 Call Preference — Aap Decide Karein</label>
+          <div class="copts" id="copts">
+            <div class="copt active" onclick="selCall(this,'anytime')"><span class="copt-icon">📞</span><div><div class="copt-t">Call Anytime</div><div class="copt-s">9AM–7PM</div></div></div>
+            <div class="copt" onclick="selCall(this,'morning')"><span class="copt-icon">🌅</span><div><div class="copt-t">Subah</div><div class="copt-s">9AM–12PM</div></div></div>
+            <div class="copt" onclick="selCall(this,'evening')"><span class="copt-icon">🌆</span><div><div class="copt-t">Shaam</div><div class="copt-s">4PM–7PM</div></div></div>
+            <div class="copt nocall" onclick="selCall(this,'nocall')"><span class="copt-icon">🚫</span><div><div class="copt-t">Call Mat Karo</div><div class="copt-s">WhatsApp only</div></div></div>
+          </div>
+          <input type="hidden" id="callPref" value="anytime">
+        </div>
+        <div class="dmini">
+          <div class="dmini-t">🔐 Data Vault — Aapka Data Sirf Aapka Hai</div>
+          <div class="dmini-r"><span>🚫</span><span>Aapka data kabhi bhi kisi ko nahi becha jayega</span></div>
+          <div class="dmini-r"><span>📵</span><span>WhatsApp "STOP CALLS" karein — calls turant band</span></div>
+          <div class="dmini-r"><span>🗑️</span><span>WhatsApp "DELETE MY DATA" — 48 ghante mein hata denge</span></div>
+        </div>
+        <div class="consents">
+          <label class="crow"><input type="checkbox" required><span>I agree to be contacted as per my call preference above</span></label>
+          <label class="crow"><input type="checkbox" required><span>I understand I can withdraw consent anytime by sending "STOP" on WhatsApp</span></label>
+        </div>
+        <button type="submit" class="sbtn">✅ Submit Securely — Best Rate Paayein</button>
+        <div class="fnote">🔐 256-bit Encrypted · Data Vault Protected · Zero Spam Policy</div>
+      </form>
       <div class="stop-strip">
         <span>🚫</span>
         <div class="stop-text">Pehle apply kar chuke hain? <strong>Send "STOP CALLS"</strong> on WhatsApp to stop all calls instantly.</div>
         <a href="https://wa.me/919660031171?text=STOP%20CALLS" class="stop-btn" target="_blank">Stop Calls →</a>
       </div>
-
     </div>
   </div>
 </section>
