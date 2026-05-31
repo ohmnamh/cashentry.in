@@ -1,37 +1,55 @@
-/* Accordion active support */
-.faq-a {
-  display: none;
-  padding: 15px;
-  background: #fdfdfd;
+/* --- DARK MODE VARIABLES & STYLES --- */
+body { transition: background-color 0.3s, color 0.3s; }
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
 }
-.faq-a.show {
-  display: block;
+body.dark-mode .nav-container, 
+body.dark-mode .form-container, 
+body.dark-mode .calc-card {
+  background-color: #1e1e1e;
+  border-color: #333;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+body.dark-mode h2, body.dark-mode h3 { color: #ffffff; }
+body.dark-mode .fg label { color: #bbbbbb; }
+body.dark-mode input { background: #2c2c2c; color: #fff; border-color: #444; }
+
+.theme-btn {
+  background: none; border: 1px solid #ccc; border-radius: 20px;
+  padding: 5px 15px; cursor: pointer; font-weight: bold;
 }
 
-/* Exit Popup Style Engine */
-.exit-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  z-index: 9999;
-  justify-content: center; align-items: center;
+/* --- SECURITY BADGES & FORM UPGRADES --- */
+.form-header { text-align: center; margin-bottom: 20px; }
+.step-badge {
+  background: #e3f2fd; color: #0d47a1; padding: 4px 10px;
+  border-radius: 12px; font-size: 12px; font-weight: bold;
 }
-.exit-overlay.show {
-  display: flex;
-}
-.popup-box {
-  background: #fff; padding: 30px; border-radius: 8px;
-  max-width: 450px; text-align: center; position: relative;
-}
-.close-popup {
-  position: absolute; top: 10px; right: 15px;
-  font-size: 24px; cursor: pointer; color: #aaa;
+.security-badges {
+  display: flex; justify-content: center; gap: 15px;
+  margin-top: 15px; font-size: 12px; color: #4caf50; font-weight: 600;
 }
 
-/* Floating Actions */
-.whatsapp-bubble {
-  position: fixed; bottom: 20px; right: 20px; z-index: 999;
-  width: 60px; height: 60px; border-radius: 50%;
+/* --- ANIMATED STATS COUNTER --- */
+.stats-sec {
+  display: flex; justify-content: space-around; flex-wrap: wrap;
+  padding: 40px 20px; background: linear-gradient(135deg, #0d47a1, #1976d2);
+  color: white; text-align: center;
 }
-.whatsapp-bubble img { width: 100%; height: 100%; }
+.stat-box h3 { font-size: 36px; display: inline; margin: 0; }
+.stat-box span { font-size: 24px; font-weight: bold; }
+.stat-box p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+
+/* --- INTERACTIVE SLIDERS --- */
+.slider {
+  -webkit-appearance: none; width: 100%; height: 6px;
+  border-radius: 5px; background: #ddd; outline: none; margin-top: 10px;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #0d47a1; cursor: pointer;
+}
+body.dark-mode .slider { background: #555; }
+body.dark-mode .slider::-webkit-slider-thumb { background: #64b5f6; }
