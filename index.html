@@ -473,7 +473,279 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
 .footer-legal{display:flex;gap:16px;flex-wrap:wrap;}
 .footer-legal a{font-size:11px;color:rgba(240,248,255,0.35);text-decoration:none;transition:color 0.3s;cursor:pointer;}
 .footer-legal a:hover{color:var(--blue);}
-
+/* ============================================
+   MODULE 1 — ANIMATED TRUST STATS
+   ============================================ */
+  .trust-stats-section{
+  padding:80px 5%;
+  background:linear-gradient(135deg,rgba(13,142,207,0.06),rgba(10,31,53,0.4));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.trust-stats-label{
+  text-align:center;font-size:11px;
+  text-transform:uppercase;letter-spacing:3px;
+  color:var(--blue);font-weight:700;margin-bottom:12px;
+}
+.trust-stats-title{
+  font-family:'Playfair Display',serif;font-size:34px;
+  text-align:center;margin-bottom:8px;
+}
+.trust-stats-sub{
+  font-size:13px;color:var(--gray);text-align:center;
+  margin-bottom:52px;
+}
+ 
+/* ANIMATED COUNTER CARDS */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;margin-bottom:52px;
+}
+.stat-card{
+  background:rgba(10,31,53,0.8);
+  border:1px solid rgba(13,142,207,0.15);
+  border-radius:20px;padding:32px 24px;
+  text-align:center;position:relative;
+  overflow:hidden;transition:all 0.4s;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:linear-gradient(90deg,var(--blue),#64d2ff);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.6s ease;
+}
+.stat-card.animated::before{transform:scaleX(1);}
+.stat-card:hover{
+  border-color:rgba(13,142,207,0.3);
+  transform:translateY(-6px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+.stat-icon{font-size:36px;margin-bottom:14px;display:block;}
+.stat-counter{
+  font-family:'Playfair Display',serif;
+  font-size:44px;font-weight:900;
+  color:var(--blue);line-height:1;margin-bottom:6px;
+}
+.stat-suffix{color:var(--gold2);}
+.stat-label{font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;}
+.stat-sub{font-size:11px;color:var(--gray);}
+ 
+/* TRUST BADGES ROW */
+.trust-badges-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+.trust-badge-card{
+  background:rgba(10,31,53,0.6);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;padding:20px 16px;
+  text-align:center;transition:all 0.3s;
+}
+.trust-badge-card:hover{
+  border-color:rgba(13,142,207,0.25);
+  transform:translateY(-4px);
+}
+.tb-icon{font-size:28px;margin-bottom:10px;display:block;}
+.tb-title{font-size:12px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.tb-desc{font-size:10px;color:var(--gray);line-height:1.5;}
+ 
+/* DPDP + SSL BADGES */
+.compliance-row{
+  display:flex;gap:16px;justify-content:center;
+  flex-wrap:wrap;margin-top:40px;
+}
+.compliance-badge{
+  display:flex;align-items:center;gap:12px;
+  border-radius:14px;padding:14px 20px;
+  transition:all 0.3s;
+}
+.dpdp-badge{
+  background:linear-gradient(135deg,rgba(34,197,94,0.1),rgba(34,197,94,0.04));
+  border:1px solid rgba(34,197,94,0.25);
+}
+.ssl-badge{
+  background:linear-gradient(135deg,rgba(13,142,207,0.1),rgba(13,142,207,0.04));
+  border:1px solid rgba(13,142,207,0.25);
+}
+.rbi-badge{
+  background:linear-gradient(135deg,rgba(200,168,75,0.1),rgba(200,168,75,0.04));
+  border:1px solid rgba(200,168,75,0.25);
+}
+.cibil-safe-badge{
+  background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(139,92,246,0.04));
+  border:1px solid rgba(139,92,246,0.25);
+}
+.cb-icon{font-size:28px;}
+.cb-title{font-size:12px;font-weight:700;}
+.cb-desc{font-size:10px;color:var(--gray);margin-top:2px;}
+.dpdp-badge .cb-title{color:#86efac;}
+.ssl-badge .cb-title{color:#64d2ff;}
+.rbi-badge .cb-title{color:var(--gold2);}
+.cibil-safe-badge .cb-title{color:#c4b5fd;}
+ 
+/* ============================================
+   MODULE 2 — BLOG SECTION
+   ============================================ */
+.blog-section{padding:90px 5%;}
+.blog-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;margin-top:52px;
+}
+.blog-card{
+  background:var(--card);
+  border:1px solid rgba(13,142,207,0.1);
+  border-radius:20px;overflow:hidden;
+  transition:all 0.4s;cursor:pointer;
+}
+.blog-card:hover{
+  border-color:rgba(13,142,207,0.3);
+  transform:translateY(-8px);
+  box-shadow:0 24px 60px rgba(0,0,0,0.4);
+}
+.blog-thumb{
+  height:180px;display:flex;align-items:center;
+  justify-content:center;font-size:64px;
+  position:relative;overflow:hidden;
+}
+.blog-1-thumb{background:linear-gradient(135deg,#0a1f35,#0d2845);}
+.blog-2-thumb{background:linear-gradient(135deg,#1a0707,#2d0f0f);}
+.blog-3-thumb{background:linear-gradient(135deg,#071a0f,#0a2d1a);}
+.blog-thumb-tag{
+  position:absolute;bottom:12px;left:16px;
+  font-size:10px;font-weight:700;padding:4px 12px;
+  border-radius:100px;text-transform:uppercase;letter-spacing:1px;
+}
+.blog-1-thumb .blog-thumb-tag{background:rgba(13,142,207,0.3);color:#64d2ff;}
+.blog-2-thumb .blog-thumb-tag{background:rgba(239,68,68,0.3);color:#fca5a5;}
+.blog-3-thumb .blog-thumb-tag{background:rgba(34,197,94,0.3);color:#86efac;}
+ 
+.blog-content{padding:24px;}
+.blog-meta{
+  display:flex;align-items:center;gap:12px;
+  font-size:11px;color:var(--gray);margin-bottom:12px;
+}
+.blog-dot{width:4px;height:4px;background:var(--gray);border-radius:50%;}
+.blog-title{
+  font-family:'Playfair Display',serif;font-size:18px;
+  font-weight:700;margin-bottom:10px;line-height:1.3;
+  color:var(--white);
+}
+.blog-excerpt{font-size:12px;color:var(--gray);line-height:1.7;margin-bottom:16px;}
+.blog-read-more{
+  font-size:12px;font-weight:700;color:var(--blue);
+  display:flex;align-items:center;gap:6px;
+  text-decoration:none;transition:gap 0.3s;
+}
+.blog-card:hover .blog-read-more{gap:10px;}
+ 
+/* BLOG MODAL */
+.blog-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.92);z-index:10000;
+  overflow-y:auto;padding:40px 20px;
+}
+.blog-overlay.show{display:block;}
+.blog-post{
+  max-width:760px;margin:0 auto;
+  background:var(--dark2);border:1px solid var(--border);
+  border-radius:24px;overflow:hidden;
+}
+.blog-post-header{
+  padding:48px 48px 32px;position:relative;
+}
+.blog-1-header{background:linear-gradient(135deg,#0a1f35,#0d2845);}
+.blog-2-header{background:linear-gradient(135deg,#1a0707,#2d0f0f);}
+.blog-3-header{background:linear-gradient(135deg,#071a0f,#0a2d1a);}
+.blog-close{
+  position:absolute;top:20px;right:20px;
+  background:rgba(255,255,255,0.1);border:none;
+  border-radius:50%;width:36px;height:36px;
+  color:white;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;
+}
+.blog-close:hover{background:rgba(239,68,68,0.2);}
+.blog-post-icon{font-size:52px;margin-bottom:16px;display:block;}
+.blog-post-category{
+  font-size:11px;text-transform:uppercase;
+  letter-spacing:2px;font-weight:700;margin-bottom:10px;
+}
+.blog-post-title{
+  font-family:'Playfair Display',serif;
+  font-size:30px;font-weight:900;
+  line-height:1.2;margin-bottom:16px;
+}
+.blog-post-meta{
+  display:flex;gap:16px;font-size:12px;
+  color:rgba(255,255,255,0.5);flex-wrap:wrap;
+}
+.blog-post-body{padding:40px 48px;}
+.blog-post-body h2{
+  font-family:'Playfair Display',serif;font-size:22px;
+  color:var(--blue);margin:28px 0 12px;
+}
+.blog-post-body h3{
+  font-size:16px;font-weight:700;
+  color:var(--gold2);margin:20px 0 10px;
+}
+.blog-post-body p{
+  font-size:13px;color:var(--gray);
+  line-height:1.9;margin-bottom:14px;
+}
+.blog-post-body strong{color:var(--white);}
+.blog-highlight{
+  background:rgba(13,142,207,0.08);
+  border-left:3px solid var(--blue);
+  border-radius:0 12px 12px 0;
+  padding:16px 20px;margin:20px 0;
+  font-size:13px;color:var(--white);line-height:1.7;
+}
+.blog-highlight-green{
+  background:rgba(34,197,94,0.08);
+  border-left:3px solid var(--green);
+}
+.blog-highlight-gold{
+  background:rgba(200,168,75,0.08);
+  border-left:3px solid var(--gold);
+}
+.blog-list{
+  list-style:none;display:flex;
+  flex-direction:column;gap:10px;margin:14px 0;
+}
+.blog-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--gray);line-height:1.7;
+}
+.blog-list li::before{
+  content:'→';color:var(--blue);
+  font-weight:700;flex-shrink:0;margin-top:1px;
+}
+.blog-cta-box{
+  background:linear-gradient(135deg,rgba(13,142,207,0.12),rgba(13,142,207,0.04));
+  border:1px solid rgba(13,142,207,0.25);
+  border-radius:16px;padding:24px;margin-top:32px;
+  text-align:center;
+}
+.blog-cta-title{
+  font-family:'Playfair Display',serif;
+  font-size:20px;margin-bottom:8px;
+}
+.blog-cta-desc{font-size:13px;color:var(--gray);margin-bottom:16px;}
+.blog-cta-btn{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:white;padding:12px 28px;border-radius:100px;
+  font-weight:700;font-size:13px;text-decoration:none;
+  margin:0 6px;transition:all 0.3s;
+}
+.blog-cta-btn:hover{transform:translateY(-2px);}
+ 
+/* SECTION HEADERS */
+.slabel{font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--blue);font-weight:700;margin-bottom:10px;text-align:center;}
+.stitle{font-family:'Playfair Display',serif;font-size:34px;text-align:center;margin-bottom:10px;}
+.stitle .b{color:var(--blue);}
+.ssub{font-size:13px;color:var(--gray);text-align:center;max-width:520px;margin:0 auto;}
+  
 /* RESPONSIVE */
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;padding-top:88px;}
@@ -525,6 +797,9 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
     <li><a href="#calculators">Calculators</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#trust">Why Us</a></li>
+<li><a href="#blog">Blog</a></li>
+    
   </ul>
   <a href="#apply" class="nav-btn">Apply Free →</a>
 </nav>
@@ -789,7 +1064,101 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
     <div class="step"><div class="step-n">5</div><div class="step-t">Loan Mila! 💰</div><div class="step-d">Account mein paise. Phir 24/7 support.</div></div>
   </div>
 </section>
-
+  
+<section class="trust-stats-section" id="trust">
+  <div class="trust-stats-label">Why Trust Us</div>
+  <h2 class="trust-stats-title" style="font-family:'Playfair Display',serif;">Numbers Jo <span style="color:var(--blue)">Bolte Hain</span></h2>
+  <p class="trust-stats-sub">Real numbers. Real customers. Real results.</p>
+ 
+  <!-- ANIMATED COUNTER CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card" id="stat-1">
+      <span class="stat-icon">💰</span>
+      <div class="stat-counter"><span class="count" data-target="847" data-suffix="Cr+">0</span></div>
+      <div class="stat-label">Loans Disbursed</div>
+      <div class="stat-sub">Total loan amount processed</div>
+    </div>
+    <div class="stat-card" id="stat-2">
+      <span class="stat-icon">🏦</span>
+      <div class="stat-counter"><span class="count" data-target="40" data-suffix="+">0</span></div>
+      <div class="stat-label">Banking Partners</div>
+      <div class="stat-sub">Banks & NBFCs on platform</div>
+    </div>
+    <div class="stat-card" id="stat-3">
+      <span class="stat-icon">😊</span>
+      <div class="stat-counter"><span class="count" data-target="2400" data-suffix="+">0</span></div>
+      <div class="stat-label">Happy Customers</div>
+      <div class="stat-sub">Across India served</div>
+    </div>
+    <div class="stat-card" id="stat-4">
+      <span class="stat-icon">⚡</span>
+      <div class="stat-counter"><span class="count" data-target="98" data-suffix="%">0</span></div>
+      <div class="stat-label">Satisfaction Rate</div>
+      <div class="stat-sub">Customer happiness score</div>
+    </div>
+  </div>
+ 
+  <!-- TRUST BADGES -->
+  <div class="trust-badges-grid">
+    <div class="trust-badge-card">
+      <span class="tb-icon">🛡️</span>
+      <div class="tb-title">CIBIL Safe</div>
+      <div class="tb-desc">Soft Inquiry Only — Zero credit score impact</div>
+    </div>
+    <div class="trust-badge-card">
+      <span class="tb-icon">🔐</span>
+      <div class="tb-title">Data Vault</div>
+      <div class="tb-desc">256-bit encrypted — Never sold to anyone</div>
+    </div>
+    <div class="trust-badge-card">
+      <span class="tb-icon">💸</span>
+      <div class="tb-title">Zero Fee</div>
+      <div class="tb-desc">100% free service for all customers</div>
+    </div>
+    <div class="trust-badge-card">
+      <span class="tb-icon">📵</span>
+      <div class="tb-title">No Spam</div>
+      <div class="tb-desc">Call on your terms — stop anytime</div>
+    </div>
+    <div class="trust-badge-card">
+      <span class="tb-icon">⚡</span>
+      <div class="tb-title">30 Min Response</div>
+      <div class="tb-desc">Expert calls within 30 minutes</div>
+    </div>
+  </div>
+ 
+  <!-- COMPLIANCE BADGES -->
+  <div class="compliance-row">
+    <div class="compliance-badge dpdp-badge">
+      <span class="cb-icon">🏛️</span>
+      <div>
+        <div class="cb-title">DPDP Act 2023 Compliant</div>
+        <div class="cb-desc">Digital Personal Data Protection Act — India</div>
+      </div>
+    </div>
+    <div class="compliance-badge ssl-badge">
+      <span class="cb-icon">🔒</span>
+      <div>
+        <div class="cb-title">SSL 256-bit Encrypted</div>
+        <div class="cb-desc">Bank-grade security on all data</div>
+      </div>
+    </div>
+    <div class="compliance-badge rbi-badge">
+      <span class="cb-icon">🏦</span>
+      <div>
+        <div class="cb-title">RBI DSA Guidelines</div>
+        <div class="cb-desc">Compliant with RBI lending norms</div>
+      </div>
+    </div>
+    <div class="compliance-badge cibil-safe-badge">
+      <span class="cb-icon">✅</span>
+      <div>
+        <div class="cb-title">CIBIL Safe Inquiry</div>
+        <div class="cb-desc">TransUnion CIBIL Soft Check only</div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- CALCULATORS -->
 <section class="sec-alt" id="calculators">
   <div class="slabel">Free Tools</div>
@@ -869,6 +1238,75 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
   </div>
 </section>
 
+  <section class="blog-section" id="blog">
+  <div class="slabel">Financial Knowledge Hub</div>
+  <h2 class="stitle">Free <span class="b">Financial Guides</span></h2>
+  <p class="ssub">Expert advice to make smarter loan decisions. Completely free — no login needed.</p>
+ 
+  <div class="blog-grid">
+ 
+    <!-- BLOG 1 — Balance Transfer -->
+    <div class="blog-card" onclick="openBlog('blog1')">
+      <div class="blog-thumb blog-1-thumb">
+        🔄
+        <span class="blog-thumb-tag">Balance Transfer</span>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span>5 min read</span>
+          <span class="blog-dot"></span>
+          <span>Finance Tips</span>
+          <span class="blog-dot"></span>
+          <span>High Value</span>
+        </div>
+        <div class="blog-title">Balance Transfer Se ₹2 Lakh Tak Kaise Bachaayein</div>
+        <div class="blog-excerpt">Kya aap abhi bhi 18% interest par loan bhar rahe hain? Balance Transfer aapko lakhs bachane ka mauka de sakta hai. Jaaniye kaise...</div>
+        <a class="blog-read-more">Read Full Guide →</a>
+      </div>
+    </div>
+ 
+    <!-- BLOG 2 — Personal Loan Mistakes -->
+    <div class="blog-card" onclick="openBlog('blog2')">
+      <div class="blog-thumb blog-2-thumb">
+        ⚠️
+        <span class="blog-thumb-tag">Must Read</span>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span>7 min read</span>
+          <span class="blog-dot"></span>
+          <span>Loan Guide</span>
+          <span class="blog-dot"></span>
+          <span>Trending</span>
+        </div>
+        <div class="blog-title">Personal Loan Lene Ki 7 Badi Galtiyan — Jo Log Karte Hain</div>
+        <div class="blog-excerpt">Bahut log personal loan lete waqt yeh 7 galtiyan karte hain — jo baad mein bahut mehengi padti hain. Kya aap bhi inhe karte hain?</div>
+        <a class="blog-read-more">Read Full Guide →</a>
+      </div>
+    </div>
+ 
+    <!-- BLOG 3 — Flexi Loan -->
+    <div class="blog-card" onclick="openBlog('blog3')">
+      <div class="blog-thumb blog-3-thumb">
+        ⚡
+        <span class="blog-thumb-tag">Flexi Loan</span>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <span>6 min read</span>
+          <span class="blog-dot"></span>
+          <span>Product Guide</span>
+          <span class="blog-dot"></span>
+          <span>New</span>
+        </div>
+        <div class="blog-title">Flexi Loan Kya Hai? — Personal Loan Se Kaise Alag Hai</div>
+        <div class="blog-excerpt">Flexi Loan ek aisa facility hai jo aapko sirf use kiye gaye amount par interest bharne deta hai. Sahi hai ya nahi — aapke liye guide...</div>
+        <a class="blog-read-more">Read Full Guide →</a>
+      </div>
+    </div>
+ 
+  </div>
+</section>
 <!-- FAQ SECTION -->
 <section class="faq-section" id="faq">
   <div class="slabel">Common Questions</div>
@@ -949,6 +1387,229 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
   </div>
 </section>
 
+  <div class="blog-overlay" id="blog1">
+  <div class="blog-post">
+    <div class="blog-post-header blog-1-header">
+      <button class="blog-close" onclick="closeBlog('blog1')">✕</button>
+      <span class="blog-post-icon">🔄</span>
+      <div class="blog-post-category" style="color:#64d2ff;">Balance Transfer Guide · CashEntry.in</div>
+      <div class="blog-post-title">Balance Transfer Se ₹2 Lakh Tak Kaise Bachaayein</div>
+      <div class="blog-post-meta">
+        <span>📅 May 2026</span>
+        <span>⏱️ 5 min read</span>
+        <span>✍️ CashEntry.in Experts</span>
+      </div>
+    </div>
+    <div class="blog-post-body">
+      <p>Kya aap abhi bhi ek aise loan ki EMI bhar rahe hain jiska interest rate 16% ya usse zyada hai? Toh shayad aap <strong>har mahine hazaron rupaye zyada de rahe hain</strong> — bina kisi wajah ke.</p>
+      <div class="blog-highlight">💡 <strong>Quick Fact:</strong> Agar aapka ₹5 Lakh ka personal loan 18% par chal raha hai aur aap isse 11% par transfer karte hain — toh 3 saal mein aap approximately ₹1.2 Lakh bacha sakte hain!</div>
+ 
+      <h2>Balance Transfer Kya Hota Hai?</h2>
+      <p>Balance Transfer matlab hai — apna existing loan ek bank se doosre bank mein <strong>lower interest rate par</strong> shift karna. Naya bank aapka purana loan pay karke aapko naye (lower) rate par loan deta hai.</p>
+      <p>Yeh bilkul waise hai jaise aap ek mehenge market se same cheez ek saste market se khareed rahe ho. Fark sirf yeh hai ki yahan aap apna loan shift kar rahe ho — apna paisa nahi.</p>
+ 
+      <h2>Balance Transfer Ke 5 Bade Fayde</h2>
+      <ul class="blog-list">
+        <li><strong>EMI Kam Hoti Hai:</strong> Lower interest rate = lower monthly EMI. Har mahine aapke pocket mein zyada paise.</li>
+        <li><strong>Total Interest Bachta Hai:</strong> Puri loan tenure mein lakhs ki savings possible hai.</li>
+        <li><strong>Top-Up Loan Option:</strong> Nayi bank se extra loan bhi le sakte ho same time par.</li>
+        <li><strong>Tenure Adjust Kar Sakte Ho:</strong> Chaho toh tenure badhaao — EMI aur kam karo.</li>
+        <li><strong>Better Service:</strong> Purani bank ki service achhi nahi? Switch karo!</li>
+      </ul>
+ 
+      <h2>Kab Karna Chahiye Balance Transfer?</h2>
+      <div class="blog-highlight blog-highlight-green">
+        ✅ <strong>Achha time hai agar:</strong><br>
+        • Current rate aur new rate mein 2% ya zyada ka fark ho<br>
+        • Remaining tenure abhi bhi 12 months se zyada ho<br>
+        • Aapka CIBIL score 700+ ho<br>
+        • Processing fees savings se kam ho
+      </div>
+ 
+      <h2>Balance Transfer Se Pehle Check Karo — 4 Cheezein</h2>
+      <h3>1. Processing Fee Calculate Karo</h3>
+      <p>Naya bank processing fee leta hai — usually 0.5% to 2% of loan amount. Yeh fee aapki total savings se kam honi chahiye. Tabhi transfer worth it hai.</p>
+      <h3>2. Prepayment Penalty Check Karo</h3>
+      <p>Kuch banks existing loan par prepayment penalty lete hain. Yeh bhi calculate karo balance transfer se pehle.</p>
+      <h3>3. CIBIL Score Check Karo</h3>
+      <p>Naya bank aapka CIBIL score dekhega. 700 se upar score hona chahiye achhe rate ke liye. CashEntry.in par CIBIL Safe inquiry bilkul free mein karo.</p>
+      <h3>4. Remaining Tenure Check Karo</h3>
+      <p>Agar sirf 6 months bacha hai loan mein — transfer shayad worth it na ho. Longer remaining tenure = more savings from lower rate.</p>
+ 
+      <h2>Real Example — Kitna Bachega?</h2>
+      <div class="blog-highlight blog-highlight-gold">
+        📊 <strong>Example Calculation:</strong><br><br>
+        Loan Amount: ₹3,00,000<br>
+        Current Rate: 18% | New Rate: 11%<br>
+        Remaining Tenure: 24 months<br><br>
+        Current EMI: ₹14,975/month<br>
+        New EMI: ₹13,876/month<br>
+        <strong>EMI Saving: ₹1,099/month</strong><br>
+        <strong>Total Saving in 24 months: ₹26,376!</strong>
+      </div>
+ 
+      <h2>Balance Transfer Process — Step by Step</h2>
+      <ul class="blog-list">
+        <li>CashEntry.in par free eligibility check karo</li>
+        <li>Sabse best BT offer compare karo — 40+ banks mein</li>
+        <li>Documents submit karo — Aadhaar, PAN, salary slips, bank statement</li>
+        <li>Naya bank purani bank ko directly pay karta hai</li>
+        <li>Aap naye lower EMI par repayment shuru karo</li>
+      </ul>
+ 
+      <div class="blog-cta-box">
+        <div class="blog-cta-title">🔄 Free Balance Transfer Check Karo!</div>
+        <div class="blog-cta-desc">Humara free BT Calculator use karo — exactly jaano kitna bachega. Phir CashEntry.in par free consultation lo.</div>
+        <a href="#calculators" class="blog-cta-btn" onclick="closeBlog('blog1')">🧮 BT Calculator Use Karo</a>
+        <a href="#apply" class="blog-cta-btn" onclick="closeBlog('blog1')">🚀 Free Consultation Lo</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ============================================
+     BLOG 2 FULL CONTENT — PERSONAL LOAN MISTAKES
+     ============================================ -->
+<div class="blog-overlay" id="blog2">
+  <div class="blog-post">
+    <div class="blog-post-header blog-2-header">
+      <button class="blog-close" onclick="closeBlog('blog2')">✕</button>
+      <span class="blog-post-icon">⚠️</span>
+      <div class="blog-post-category" style="color:#fca5a5;">Personal Loan Guide · CashEntry.in</div>
+      <div class="blog-post-title">Personal Loan Lene Ki 7 Badi Galtiyan — Jo Log Karte Hain</div>
+      <div class="blog-post-meta">
+        <span>📅 May 2026</span>
+        <span>⏱️ 7 min read</span>
+        <span>✍️ CashEntry.in Experts</span>
+      </div>
+    </div>
+    <div class="blog-post-body">
+      <p>Personal loan lena kabhi kabhi zaroor hota hai — medical emergency, wedding, home renovation ya koi bhi urgent zaroorat. <strong>Lekin bahut log yeh 7 common galtiyan karte hain</strong> jo unhe baad mein bahut mehengi padti hain.</p>
+      <div class="blog-highlight" style="border-color:var(--red);background:rgba(239,68,68,0.06);">⚠️ <strong>Warning:</strong> Yeh galtiyan aapko lakhs ka nuksan kar sakti hain. Loan lene se pehle zaroor padho.</div>
+ 
+      <h2>Galti #1 — Sirf Apni Bank Ko Check Karna</h2>
+      <p>Zyada tar log seedha apni existing bank mein jaate hain personal loan ke liye. <strong>Yeh sabse badi galti hai.</strong> Aapki bank best rate nahi deti — woh jaanti hai aap unhe trust karte ho.</p>
+      <div class="blog-highlight blog-highlight-green">✅ <strong>Sahi Kaam:</strong> 40+ banks compare karo. CashEntry.in par free mein compare karo — sirf 2 minute mein best rate pao!</div>
+ 
+      <h2>Galti #2 — CIBIL Score Check Na Karna</h2>
+      <p>Loan apply karne se pehle <strong>apna CIBIL score zaroor check karo.</strong> Low score = high interest rate ya rejection. Pehle score jaano — phir apply karo.</p>
+      <p>CashEntry.in par CIBIL Safe Soft Check bilkul free mein hoti hai — aapka score affect nahi hota.</p>
+ 
+      <h2>Galti #3 — Processing Fee Ignore Karna</h2>
+      <p>Sirf interest rate dekh ke loan mat lo. <strong>Processing fee, prepayment penalty, foreclosure charges</strong> — yeh sab milake total cost kaafi zyada ho sakti hai.</p>
+      <ul class="blog-list">
+        <li>Processing fee: 0.5% to 3% of loan amount</li>
+        <li>Prepayment penalty: 2-4% on outstanding amount</li>
+        <li>Late payment charges: 2-3% per month</li>
+      </ul>
+ 
+      <h2>Galti #4 — Zaroorat Se Zyada Loan Lena</h2>
+      <p><strong>Sirf utna lo jitna chahiye.</strong> Zyada loan lena = zyada EMI = zyada financial stress. Apna FOIR calculate karo — CashEntry.in par free mein available hai.</p>
+      <div class="blog-highlight blog-highlight-gold">💡 <strong>Rule of Thumb:</strong> Aapki sabhi EMIs milake aapki income ka 50% se zyada nahi hona chahiye. Isse zyada = loan reject risk + financial stress.</div>
+ 
+      <h2>Galti #5 — Loan Tenure Bahut Lamba Rakhna</h2>
+      <p>Zyada tenure = zyada total interest. Haan, EMI kam hoti hai — lekin <strong>overall aap bahut zyada pay karte ho.</strong></p>
+      <p>Apni capacity ke according shortest comfortable tenure choose karo. EMI Calculator use karo different tenures compare karne ke liye.</p>
+ 
+      <h2>Galti #6 — Multiple Loans Ek Saath Apply Karna</h2>
+      <p>Kai banks mein ek saath apply karna = multiple Hard Inquiries = CIBIL score tezi se girata hai = <strong>sabhi banks reject kar dete hain.</strong></p>
+      <div class="blog-highlight" style="border-color:var(--red);background:rgba(239,68,68,0.06);">❌ <strong>Yeh Galti Mat Karo:</strong> Seedha 5 banks mein apply mat karo. Pehle compare karo — CashEntry.in par CIBIL Safe check karo — phir sirf ek best option mein apply karo!</div>
+ 
+      <h2>Galti #7 — Terms & Conditions Na Padhna</h2>
+      <p>Loan agreement mein <strong>prepayment clause, floating vs fixed rate, insurance clause</strong> dhyan se padho. Bahut baar banks compulsory insurance bech dete hain jo bahut mehengi hoti hai.</p>
+      <p>CashEntry.in par hum aapko har cheez clearly explain karte hain — koi hidden surprise nahi.</p>
+ 
+      <div class="blog-cta-box">
+        <div class="blog-cta-title">💡 Smart Loan Lo — CashEntry.in Se</div>
+        <div class="blog-cta-desc">Yeh 7 galtiyan avoid karo. CashEntry.in par free mein 40+ banks compare karo — best rate guaranteed. CIBIL Safe inquiry.</div>
+        <a href="#apply" class="blog-cta-btn" onclick="closeBlog('blog2')">🚀 Smart Loan Apply Karo</a>
+        <a href="#calculators" class="blog-cta-btn" onclick="closeBlog('blog2')">📊 FOIR Check Karo</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ============================================
+     BLOG 3 FULL CONTENT — FLEXI LOAN
+     ============================================ -->
+<div class="blog-overlay" id="blog3">
+  <div class="blog-post">
+    <div class="blog-post-header blog-3-header">
+      <button class="blog-close" onclick="closeBlog('blog3')">✕</button>
+      <span class="blog-post-icon">⚡</span>
+      <div class="blog-post-category" style="color:#86efac;">Flexi Loan Guide · CashEntry.in</div>
+      <div class="blog-post-title">Flexi Loan Kya Hai? Personal Loan Se Kaise Alag Hai</div>
+      <div class="blog-post-meta">
+        <span>📅 May 2026</span>
+        <span>⏱️ 6 min read</span>
+        <span>✍️ CashEntry.in Experts</span>
+      </div>
+    </div>
+    <div class="blog-post-body">
+      <p>Maan lijiye aapko ek credit card mila jisme limit ₹5 Lakh hai. Aap jo chahein nikalo, jab chahein wapas karo — <strong>aur interest sirf nikale hue amount par lagta hai.</strong> Yahi hai Flexi Loan ya Line of Credit!</p>
+      <div class="blog-highlight blog-highlight-green">⚡ <strong>Key Concept:</strong> Flexi Loan mein aapko PURI amount ka interest nahi bharna. Sirf use kiye hue amount ka bharna hota hai. Yeh personal loan se fundamentally alag hai!</div>
+ 
+      <h2>Flexi Loan vs Personal Loan — Clear Comparison</h2>
+      <div class="blog-highlight blog-highlight-gold">
+        📊 <strong>Example — ₹5 Lakh Ki Zaroorat:</strong><br><br>
+        <strong>Personal Loan:</strong><br>
+        ₹5 Lakh liya → Poore ₹5 Lakh par interest → EMI fix → Wapas lene ka option nahi<br><br>
+        <strong>Flexi Loan:</strong><br>
+        ₹5 Lakh limit mili → ₹2 Lakh nikale → Sirf ₹2 Lakh par interest → ₹2 Lakh wapas kiya → Limit phir ₹5 Lakh!
+      </div>
+ 
+      <h2>Flexi Loan Ke 6 Bade Fayde</h2>
+      <ul class="blog-list">
+        <li><strong>Sirf Use Par Interest:</strong> ₹5 Lakh limit mein se ₹1 Lakh nikala → sirf ₹1 Lakh par interest. Baaki ₹4 Lakh par zero interest!</li>
+        <li><strong>Kabhi Bhi Withdraw Karo:</strong> Emergency mein instantly paise nikalo — koi application process nahi.</li>
+        <li><strong>Kabhi Bhi Wapas Karo:</strong> Jab paisa aaye — wapas karo. No penalty in most cases.</li>
+        <li><strong>Revolving Credit:</strong> Wapas karo → limit phir se available. Baar baar use karo.</li>
+        <li><strong>No Fixed EMI:</strong> Kuch Flexi Loans mein sirf interest pay karo as EMI — principal baad mein.</li>
+        <li><strong>Business ke Liye Best:</strong> Irregular income waalon ke liye perfect — jo chahiye nikalo, jo extra hai wapas karo.</li>
+      </ul>
+ 
+      <h2>Flexi Loan Kaun Le Sakta Hai?</h2>
+      <div class="blog-highlight blog-highlight-green">
+        ✅ <strong>Best For:</strong><br>
+        • Business owners with irregular income<br>
+        • Freelancers and self-employed professionals<br>
+        • Salaried people with frequent small emergencies<br>
+        • Anyone who needs flexibility over fixed EMI
+      </div>
+ 
+      <h2>Flexi Loan Ke Nuksan — Dhyan Rakho</h2>
+      <ul class="blog-list">
+        <li><strong>Higher Interest Rate:</strong> Personal loan se thoda zyada rate hota hai usually — 13-18% vs 10-14%</li>
+        <li><strong>Discipline Zaroori Hai:</strong> Credit card jaisi limit milne par kuch log zyada kharcha karte hain</li>
+        <li><strong>Maintenance Charges:</strong> Kuch banks annual maintenance fee lete hain</li>
+      </ul>
+ 
+      <h2>Flexi Loan Kab Lena Chahiye?</h2>
+      <h3>✅ Lo Agar:</h3>
+      <ul class="blog-list">
+        <li>Aapki income irregular hai — business, freelancing</li>
+        <li>Aapko thode thode paise ki zaroorat repeatedly padti hai</li>
+        <li>Aap discipline ke saath use karte ho</li>
+      </ul>
+      <h3>❌ Mat Lo Agar:</h3>
+      <ul class="blog-list">
+        <li>Aapko ek baar mein puri amount chahiye — personal loan better</li>
+        <li>Fixed EMI aapke liye comfortable hai</li>
+        <li>Aap credit limit milne par zyada kharcha karne lagte ho</li>
+      </ul>
+ 
+      <h2>Top Banks Offering Flexi Loans In India</h2>
+      <p>HDFC FlexiLoan, Bajaj Finserv Flexi Personal Loan, IDFC First Bank, Axis Bank FlexiCredit, Kotak Mahindra — sabse achhe options hain. CashEntry.in par compare karo.</p>
+ 
+      <div class="blog-cta-box">
+        <div class="blog-cta-title">⚡ Flexi Loan Eligible Ho?</div>
+        <div class="blog-cta-desc">CashEntry.in par free mein check karo — 40+ banks ke Flexi Loan options compare karo. CIBIL Safe inquiry — zero credit score impact.</div>
+        <a href="#apply" class="blog-cta-btn" onclick="closeBlog('blog3')">🚀 Free Eligibility Check</a>
+        <a href="#calculators" class="blog-cta-btn" onclick="closeBlog('blog3')">🧮 EMI Calculator</a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- DATA VAULT -->
 <section class="sec" id="vault">
   <div class="slabel">Data Vault</div>
@@ -1369,6 +2030,77 @@ document.querySelectorAll('.prod-card,.step,.vm-card,.vault-pill,.dr-card,.bank-
   el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   obs.observe(el);
+});
+  // ============================================
+// ANIMATED COUNTER — Copy this JS to your site
+// ============================================
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  const suffix = el.getAttribute('data-suffix') || '';
+  const duration = 2000;
+  const steps = 60;
+  const increment = target / steps;
+  let current = 0;
+  const timer = setInterval(() => {
+    current += increment;
+    if(current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(current).toLocaleString('en-IN') + suffix;
+  }, duration / steps);
+}
+ 
+// Trigger when visible
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('animated');
+      entry.target.querySelectorAll('.count').forEach(animateCounter);
+      counterObs.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.3});
+ 
+document.querySelectorAll('.stat-card').forEach(card => counterObs.observe(card));
+ 
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {threshold: 0.1});
+ 
+document.querySelectorAll('.trust-badge-card,.compliance-badge,.blog-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
+ 
+// Blog functions
+function openBlog(id) {
+  document.getElementById(id).classList.add('show');
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0,0);
+}
+ 
+function closeBlog(id) {
+  document.getElementById(id).classList.remove('show');
+  document.body.style.overflow = '';
+}
+ 
+// Close on overlay click
+document.querySelectorAll('.blog-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if(e.target === this) {
+      this.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
 });
 </script>
 </body>
