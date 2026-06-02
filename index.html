@@ -40,11 +40,11 @@ body{font-family:'Sora',sans-serif;background:var(--dark);color:var(--white);ove
 .wa-bubble::after{content:'';position:absolute;bottom:-8px;right:20px;width:0;height:0;border-left:8px solid transparent;border-right:0;border-top:8px solid white;}
 
 /* TOP BAR */
-.top-bar{height:3px;background:linear-gradient(90deg,var(--blue3),var(--blue),#64d2ff,var(--blue),var(--blue3));background-size:300%;animation:shimmer 4s infinite linear;}
+.top-bar{height:auto;background:linear-gradient(90deg,var(--blue3),var(--blue),#64d2ff,var(--blue),var(--blue3));background-size:300%;animation:shimmer 4s infinite linear;}
 @keyframes shimmer{0%{background-position:0%;}100%{background-position:300%;}}
 
 /* NAV */
-nav{position:fixed;top:3px;left:0;right:0;z-index:1000;background:rgba(7,21,35,0.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px;}
+nav{position:auto;top:3px;left:0;right:0;z-index:1000;background:rgba(7,21,35,0.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px;}
 .logo-wrap{display:flex;align-items:center;text-decoration:none;gap:4px;}
 .logo-img{height:46px;width:auto;object-fit:contain;}
 .nav-links{display:flex;gap:22px;list-style:none;}
