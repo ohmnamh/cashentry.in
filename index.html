@@ -1654,6 +1654,175 @@ document.querySelectorAll('.trust-badge-card,.compliance-badge,.blog-card').forE
   el.style.transition='opacity 0.5s ease,transform 0.5s ease';
   extraObs.observe(el);
 });
+  let foirVal = 60;
+ 
+function fmt(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+ 
+function setFOIR(val, el){
+  foirVal = val;
+  document.getElementById('foir-val').value = val;
+  document.querySelectorAll('.foir-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+ 
+function updateSliders(){
+  const income = parseInt(document.getElementById('income').value);
+  const existing = parseInt(document.getElementById('existing').value);
+  const rate = parseFloat(document.getElementById('rate').value);
+  const tenure = parseInt(document.getElementById('tenure').value);
+  document.getElementById('income-display').textContent = fmt(income);
+  document.getElementById('existing-display').textContent = fmt(existing);
+  document.getElementById('rate-display').innerHTML = rate.toFixed(1)+'<span>% p.a.</span>';
+  document.getElementById('tenure-display').innerHTML = tenure+'<span> months</span>';
+}
+ 
+function calcEMI(P, annualRate, n){
+  const r = annualRate/(12*100);
+  if(r===0) return P/n;
+  return P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+}
+ 
+function calcMaxLoan(maxEMI, annualRate, n){
+  const r = annualRate/(12*100);
+  if(r===0) return maxEMI*n;
+  return maxEMI*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n));
+}
+ 
+function calculate(){
+  const income = parseInt(document.getElementById('income').value);
+  const existing = parseInt(document.getElementById('existing').value);
+  const rate = parseFloat(document.getElementById('rate').value);
+  const tenure = parseInt(document.getElementById('tenure').value);
+  const foir = foirVal;
+ 
+  // Core calculations
+  const maxTotalEMI = income * foir/100;
+  const availableEMI = Math.max(0, maxTotalEMI - existing);
+  const maxLoan = calcMaxLoan(availableEMI, rate, tenure);
+  const newEMI = calcEMI(maxLoan, rate, tenure);
+  const totalPayable = newEMI * tenure;
+  const totalInterest = totalPayable - maxLoan;
+  const currentFOIR = ((existing + newEMI)/income)*100;
+ 
+  // Update main eligibility
+  document.getElementById('eli-amount').textContent = fmt(maxLoan);
+  document.getElementById('eli-sub').textContent =
+    `At ${rate}% p.a. for ${tenure} months · New EMI: ${fmt(newEMI)}/month`;
+ 
+  // Badge
+  const badge = document.getElementById('eli-badge');
+  if(maxLoan >= 500000){
+    badge.className='eli-badge';
+    badge.style.cssText='background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#86efac;border-radius:100px;padding:6px 18px;font-size:12px;font-weight:700;';
+    badge.textContent='✅ Strong Eligibility';
+  } else if(maxLoan >= 100000){
+    badge.style.cssText='background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.3);color:#fdba74;border-radius:100px;padding:6px 18px;font-size:12px;font-weight:700;';
+    badge.textContent='⚠️ Moderate Eligibility';
+  } else {
+    badge.style.cssText='background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;border-radius:100px;padding:6px 18px;font-size:12px;font-weight:700;';
+    badge.textContent='❌ Low Eligibility — Improve FOIR';
+  }
+ 
+  // Stats
+  document.getElementById('r-new-emi').textContent = fmt(newEMI);
+  document.getElementById('r-max-emi').textContent = fmt(maxTotalEMI);
+  document.getElementById('r-avail-emi').textContent = fmt(availableEMI);
+  document.getElementById('r-foir').textContent = currentFOIR.toFixed(1)+'%';
+  document.getElementById('r-interest').textContent = fmt(totalInterest);
+  document.getElementById('r-total').textContent = fmt(totalPayable);
+ 
+  // FOIR bar
+  const foirBarFill = document.getElementById('foir-bar-fill');
+  const foirMarker = document.getElementById('foir-marker');
+  foirBarFill.style.width = Math.min(currentFOIR,100)+'%';
+  foirBarFill.style.background = currentFOIR<=40
+    ? 'linear-gradient(90deg,#22c55e,#86efac)'
+    : currentFOIR<=foir
+    ? 'linear-gradient(90deg,#0d8ecf,#64d2ff)'
+    : 'linear-gradient(90deg,#f97316,#ef4444)';
+  foirMarker.style.left = foir+'%';
+  document.getElementById('foir-limit-label').textContent = foir+'% Bank Limit';
+ 
+  // Risk chip
+  const chip = document.getElementById('foir-risk-chip');
+  const advice = document.getElementById('foir-advice-text');
+  if(currentFOIR <= 40){
+    chip.className='foir-badge-chip risk-low';chip.textContent='🟢 Excellent FOIR — Very Low Risk';
+    advice.textContent='Aapka FOIR bahut achha hai! Banks aapko best interest rates denge aur loan asaani se milega.';
+  } else if(currentFOIR <= foir){
+    chip.className='foir-badge-chip risk-low';chip.textContent='✅ Good FOIR — Eligible';
+    advice.textContent='Aap bank ke FOIR limit ke andar hain. Loan approve hone ki strong possibility hai.';
+  } else {
+    chip.className='foir-badge-chip risk-high';chip.textContent='🔴 High FOIR — Reduce EMIs First';
+    advice.textContent='Aapka FOIR bank limit se zyada hai. Pehle kuch existing loans close karein phir apply karein.';
+  }
+ 
+  // Bank comparison table
+  const banks = [
+    {name:'HDFC Bank',foir:60,rate:10.5},
+    {name:'ICICI Bank',foir:60,rate:10.75},
+    {name:'Bajaj Finserv',foir:70,rate:11.0},
+    {name:'Tata Capital',foir:70,rate:10.99},
+    {name:'SBI',foir:50,rate:11.5},
+    {name:'Kotak Bank',foir:60,rate:10.99},
+    {name:'Axis Bank',foir:60,rate:11.25},
+    {name:'IDFC First',foir:65,rate:10.75},
+  ];
+ 
+  // Sort by max eligibility
+  const bankData = banks.map(b=>{
+    const bMaxEMI = income*b.foir/100 - existing;
+    const bMaxLoan = Math.max(0, calcMaxLoan(Math.max(0,bMaxEMI), b.rate, tenure));
+    const bNewEMI = bMaxLoan>0 ? calcEMI(bMaxLoan, b.rate, tenure) : 0;
+    return {...b, maxLoan:bMaxLoan, newEMI:bNewEMI};
+  }).sort((a,b)=>b.maxLoan-a.maxLoan);
+ 
+  const tbody = document.getElementById('bank-table-body');
+  tbody.innerHTML='';
+  bankData.forEach((b,i)=>{
+    const tr = document.createElement('tr');
+    if(i===0) tr.className='best-row';
+    tr.innerHTML=`
+      <td><span class="bank-name">${b.name}</span>${i===0?'<span class="best-badge">BEST</span>':''}</td>
+      <td>${b.foir}%</td>
+      <td>${b.rate}%</td>
+      <td class="${i===0?'bank-best':''}">${fmt(b.maxLoan)}</td>
+      <td>${fmt(b.newEMI)}/mo</td>
+    `;
+    tbody.appendChild(tr);
+  });
+ 
+  // Dynamic tips
+  const tipsList = document.getElementById('tips-list');
+  tipsList.innerHTML='';
+  const tips = [];
+ 
+  if(existing > income*0.3)
+    tips.push({icon:'💳',text:'Existing EMIs bahut zyada hain. Kuch chhote loans pehle close karein — eligibility significantly badhegi.'});
+  if(rate > 14)
+    tips.push({icon:'🔄',text:'Interest rate high hai. CashEntry.in par Balance Transfer karke rate kam karwao — EMI kam hogi.'});
+  if(tenure < 36)
+    tips.push({icon:'📅',text:'Tenure badhane se monthly EMI kam hogi aur max loan amount badh jayega.'});
+  if(currentFOIR > foir)
+    tips.push({icon:'🏦',text:'Bajaj Finserv ya Tata Capital try karein — yeh 70% FOIR tak accept karte hain.'});
+  tips.push({icon:'🛡️',text:'CashEntry.in par apply karo — CIBIL Safe Soft Inquiry, score kharab nahi hoga.'});
+  tips.push({icon:'📞',text:'Co-applicant add karne se (spouse/parent) combined income calculate hogi — eligibility badh sakti hai.'});
+ 
+  tips.forEach(t=>{
+    tipsList.innerHTML+=`
+      <div class="tip-item">
+        <span class="tip-icon">${t.icon}</span>
+        <span>${t.text}</span>
+      </div>
+    `;
+  });
+ 
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+ 
+// Init
+updateSliders();
 </script>
 </body>
 </html>
