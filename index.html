@@ -368,7 +368,130 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
 .blog-cta-title{font-family:'Playfair Display',serif;font-size:19px;margin-bottom:8px;color:#f0f8ff;}
 .blog-cta-desc{font-size:12px;color:rgba(240,248,255,0.55);margin-bottom:14px;}
 .blog-cta-btn{display:inline-block;background:linear-gradient(135deg,#0d8ecf,#0a6fa0);color:white;padding:11px 22px;border-radius:100px;font-weight:700;font-size:12px;text-decoration:none;margin:0 5px;transition:all 0.3s;}
-
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#0d8ecf;--blue2:#0a6fa0;--dark:#071523;--dark2:#0a1f35;
+  --white:#f0f8ff;--gray:rgba(240,248,255,0.55);
+  --green:#22c55e;--red:#ef4444;--gold:#c8a84b;--gold2:#e8c96a;
+  --border:rgba(13,142,207,0.2);--card:rgba(10,31,53,0.85);
+}
+body{font-family:'Sora',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;padding:40px 20px;}
+ 
+.container{max-width:860px;margin:0 auto;}
+ 
+/* HEADER */
+.header{text-align:center;margin-bottom:40px;}
+.header-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,142,207,0.1);border:1px solid rgba(13,142,207,0.25);border-radius:100px;padding:7px 16px;margin-bottom:16px;}
+.header-badge span{font-size:11px;color:#64d2ff;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.header h1{font-family:'Playfair Display',serif;font-size:36px;margin-bottom:8px;}
+.header h1 .b{color:var(--blue);}
+.header p{font-size:13px;color:var(--gray);line-height:1.7;}
+ 
+/* CALC CARD */
+.calc-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:36px;margin-bottom:24px;}
+.calc-bar{height:3px;background:linear-gradient(90deg,var(--blue),#64d2ff,var(--blue));border-radius:3px;margin-bottom:28px;}
+ 
+/* SECTION TITLE */
+.sec-title{font-size:11px;font-weight:700;color:#64d2ff;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.sec-title::after{content:'';flex:1;height:1px;background:rgba(13,142,207,0.15);}
+ 
+/* INPUT GRID */
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.input-group{background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:14px;padding:18px;}
+.input-group.full{grid-column:1/-1;}
+.ig-label{font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.ig-value{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.ig-value span{font-size:12px;color:var(--blue);font-family:'Sora',sans-serif;font-weight:600;}
+ 
+/* SLIDER */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;background:rgba(255,255,255,0.1);}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#64d2ff);cursor:pointer;box-shadow:0 0 8px rgba(13,142,207,0.6);transition:transform 0.2s;}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.range-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--gray);margin-top:5px;}
+ 
+/* FOIR TOGGLE */
+.foir-toggle{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px;}
+.foir-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.25s;}
+.foir-btn.active{border-color:var(--blue);background:rgba(13,142,207,0.12);}
+.foir-btn-pct{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--white);}
+.foir-btn-label{font-size:9px;color:var(--gray);margin-top:2px;}
+.foir-btn.active .foir-btn-pct{color:#64d2ff;}
+ 
+/* CALCULATE BTN */
+.calc-btn{width:100%;background:linear-gradient(135deg,var(--blue),var(--blue2));border:none;border-radius:14px;padding:16px;color:var(--white);font-size:15px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(13,142,207,0.3);transition:all 0.3s;margin-top:8px;}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(13,142,207,0.5);}
+ 
+/* RESULTS */
+.results{display:none;margin-top:28px;}
+.results.show{display:block;}
+ 
+/* ELIGIBILITY HERO */
+.eligibility-hero{background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(34,197,94,0.04));border:2px solid rgba(34,197,94,0.3);border-radius:18px;padding:28px;text-align:center;margin-bottom:20px;}
+.eli-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#86efac;font-weight:700;margin-bottom:8px;}
+.eli-amount{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#86efac;line-height:1;}
+.eli-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-top:8px;}
+.eli-badge{display:inline-block;margin-top:12px;padding:6px 20px;border-radius:100px;font-size:12px;font-weight:700;}
+ 
+/* RESULTS GRID */
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.result-box{background:rgba(13,142,207,0.08);border:1px solid rgba(13,142,207,0.15);border-radius:14px;padding:18px;text-align:center;}
+.result-box.highlight{background:linear-gradient(135deg,rgba(13,142,207,0.15),rgba(13,142,207,0.06));border-color:rgba(13,142,207,0.3);}
+.rb-label{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.rb-value{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--blue);}
+ 
+/* FOIR GAUGE */
+.foir-result-box{background:rgba(10,31,53,0.6);border:1px solid rgba(13,142,207,0.15);border-radius:16px;padding:24px;margin-bottom:20px;}
+.foir-result-title{font-size:12px;font-weight:700;color:#64d2ff;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;text-align:center;}
+.foir-bar-wrap{margin-bottom:12px;}
+.foir-bar-bg{height:16px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden;position:relative;}
+.foir-bar-fill{height:100%;border-radius:100px;transition:width 1.2s ease;}
+.foir-bar-marker{position:absolute;top:-4px;height:24px;width:2px;background:rgba(255,255,255,0.5);}
+.foir-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--gray);margin-top:4px;}
+.foir-result-badge{text-align:center;margin-top:14px;}
+.foir-badge-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;font-size:13px;font-weight:700;}
+.risk-low{background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#86efac;}
+.risk-med{background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.3);color:#fdba74;}
+.risk-high{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;}
+.foir-advice{font-size:12px;color:var(--gray);text-align:center;margin-top:10px;line-height:1.6;}
+ 
+/* BANK COMPARISON TABLE */
+.bank-table-box{background:rgba(10,31,53,0.6);border:1px solid rgba(13,142,207,0.15);border-radius:16px;overflow:hidden;margin-bottom:20px;}
+.bank-table-title{padding:16px 20px;font-size:12px;font-weight:700;color:#64d2ff;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(13,142,207,0.1);}
+.bank-table{width:100%;border-collapse:collapse;}
+.bank-table th{background:rgba(13,142,207,0.1);padding:10px 16px;font-size:10px;font-weight:700;color:#64d2ff;text-align:left;text-transform:uppercase;letter-spacing:0.5px;}
+.bank-table td{padding:12px 16px;font-size:12px;color:var(--gray);border-top:1px solid rgba(255,255,255,0.04);}
+.bank-table tr:hover td{background:rgba(13,142,207,0.04);}
+.bank-name{color:var(--white);font-weight:600;}
+.bank-best{color:#86efac;font-weight:700;}
+.best-row td{background:rgba(34,197,94,0.05)!important;}
+.best-badge{background:var(--green);color:white;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;margin-left:6px;}
+ 
+/* TIPS BOX */
+.tips-box{background:linear-gradient(135deg,rgba(200,168,75,0.08),rgba(200,168,75,0.03));border:1px solid rgba(200,168,75,0.2);border-radius:14px;padding:20px;}
+.tips-title{font-size:12px;font-weight:700;color:var(--gold2);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.tips-list{display:flex;flex-direction:column;gap:8px;}
+.tip-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--gray);line-height:1.5;}
+.tip-icon{font-size:14px;flex-shrink:0;}
+ 
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(13,142,207,0.12),rgba(13,142,207,0.04));border:1px solid rgba(13,142,207,0.2);border-radius:16px;padding:24px;text-align:center;margin-top:20px;}
+.cta-title{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px;}
+.cta-sub{font-size:13px;color:var(--gray);margin-bottom:16px;}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;padding:12px 28px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;margin:0 6px;transition:all 0.3s;}
+.cta-btn:hover{transform:translateY(-2px);}
+.cta-btn.wa{background:linear-gradient(135deg,#22c55e,#16a34a);}
+ 
+/* RESPONSIVE */
+@media(max-width:600px){
+  .input-grid{grid-template-columns:1fr;}
+  .input-group.full{grid-column:1;}
+  .results-grid{grid-template-columns:1fr;}
+  .foir-toggle{grid-template-columns:repeat(3,1fr);}
+  .header h1{font-size:26px;}
+  .eli-amount{font-size:38px;}
+  .bank-table{font-size:11px;}
+  .bank-table th,.bank-table td{padding:8px 10px;}
+}
 /* RESPONSIVE */
 @media(max-width:768px){
   .hero{grid-template-columns:1fr;padding-top:80px;}
@@ -696,6 +819,173 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
     </div>
   </div>
 </section>
+<div class="container">
+ 
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">
+      <span>🛡️ CIBIL Safe · Free Tool · CashEntry.in</span>
+    </div>
+    <h1>Advanced <span class="b">Loan Eligibility</span> Calculator</h1>
+    <p>Apni exact loan eligibility jaaniye — income, existing EMI, interest rate aur tenure ke basis par.<br>CIBIL Safe · Free · No Login Required</p>
+  </div>
+ 
+  <!-- CALCULATOR -->
+  <div class="calc-card">
+    <div class="calc-bar"></div>
+ 
+    <!-- INCOME INPUTS -->
+    <div class="sec-title">💰 Income Details</div>
+    <div class="input-grid">
+      <div class="input-group">
+        <div class="ig-label">Gross Monthly Income</div>
+        <div class="ig-value" id="income-display">₹50,000</div>
+        <input type="range" id="income" min="10000" max="500000" step="5000" value="50000" oninput="updateSliders()">
+        <div class="range-labels"><span>₹10K</span><span>₹5L</span></div>
+      </div>
+      <div class="input-group">
+        <div class="ig-label">Existing Monthly EMIs</div>
+        <div class="ig-value" id="existing-display">₹8,000</div>
+        <input type="range" id="existing" min="0" max="200000" step="1000" value="8000" oninput="updateSliders()">
+        <div class="range-labels"><span>₹0</span><span>₹2L</span></div>
+      </div>
+    </div>
+ 
+    <!-- LOAN INPUTS -->
+    <div class="sec-title">🏦 Loan Parameters</div>
+    <div class="input-grid">
+      <div class="input-group">
+        <div class="ig-label">Interest Rate (% p.a.)</div>
+        <div class="ig-value" id="rate-display">11.0<span>% p.a.</span></div>
+        <input type="range" id="rate" min="8" max="24" step="0.5" value="11" oninput="updateSliders()">
+        <div class="range-labels"><span>8%</span><span>24%</span></div>
+      </div>
+      <div class="input-group">
+        <div class="ig-label">Loan Tenure</div>
+        <div class="ig-value" id="tenure-display">36<span> months</span></div>
+        <input type="range" id="tenure" min="12" max="84" step="6" value="36" oninput="updateSliders()">
+        <div class="range-labels"><span>12M</span><span>84M</span></div>
+      </div>
+    </div>
+ 
+    <!-- FOIR SELECTION -->
+    <div class="sec-title">📊 Bank FOIR Limit</div>
+    <div class="input-group full" style="margin-bottom:20px;">
+      <div class="ig-label">Select Bank's FOIR Policy</div>
+      <div class="foir-toggle">
+        <div class="foir-btn" onclick="setFOIR(50,this)">
+          <div class="foir-btn-pct">50%</div>
+          <div class="foir-btn-label">Conservative</div>
+          <div style="font-size:9px;color:rgba(240,248,255,0.4);margin-top:2px;">SBI, PNB</div>
+        </div>
+        <div class="foir-btn active" onclick="setFOIR(60,this)">
+          <div class="foir-btn-pct">60%</div>
+          <div class="foir-btn-label">Standard ⭐</div>
+          <div style="font-size:9px;color:rgba(240,248,255,0.4);margin-top:2px;">HDFC, ICICI</div>
+        </div>
+        <div class="foir-btn" onclick="setFOIR(70,this)">
+          <div class="foir-btn-pct">70%</div>
+          <div class="foir-btn-label">Flexible</div>
+          <div style="font-size:9px;color:rgba(240,248,255,0.4);margin-top:2px;">Bajaj, Tata</div>
+        </div>
+      </div>
+      <input type="hidden" id="foir-val" value="60">
+    </div>
+ 
+    <button class="calc-btn" onclick="calculate()">
+      🧮 Calculate My Loan Eligibility →
+    </button>
+ 
+    <!-- RESULTS -->
+    <div class="results" id="results">
+ 
+      <!-- MAIN ELIGIBILITY -->
+      <div class="eligibility-hero">
+        <div class="eli-label">✅ Maximum Loan Eligibility</div>
+        <div class="eli-amount" id="eli-amount">—</div>
+        <div class="eli-sub" id="eli-sub">—</div>
+        <div class="eli-badge" id="eli-badge"></div>
+      </div>
+ 
+      <!-- KEY STATS -->
+      <div class="results-grid">
+        <div class="result-box">
+          <div class="rb-label">New Loan EMI</div>
+          <div class="rb-value" id="r-new-emi">—</div>
+        </div>
+        <div class="result-box highlight">
+          <div class="rb-label">Max EMI Allowed</div>
+          <div class="rb-value" id="r-max-emi">—</div>
+        </div>
+        <div class="result-box">
+          <div class="rb-label">EMI Available</div>
+          <div class="rb-value" id="r-avail-emi">—</div>
+        </div>
+        <div class="result-box">
+          <div class="rb-label">Your FOIR</div>
+          <div class="rb-value" id="r-foir">—</div>
+        </div>
+        <div class="result-box">
+          <div class="rb-label">Total Interest Payable</div>
+          <div class="rb-value" id="r-interest">—</div>
+        </div>
+        <div class="result-box">
+          <div class="rb-label">Total Amount Payable</div>
+          <div class="rb-value" id="r-total">—</div>
+        </div>
+      </div>
+ 
+      <!-- FOIR GAUGE -->
+      <div class="foir-result-box">
+        <div class="foir-result-title">📊 Your FOIR Analysis</div>
+        <div class="foir-bar-wrap">
+          <div class="foir-bar-bg">
+            <div class="foir-bar-fill" id="foir-bar-fill"></div>
+            <div class="foir-bar-marker" id="foir-marker"></div>
+          </div>
+          <div class="foir-labels">
+            <span>0% Ideal</span>
+            <span id="foir-limit-label">60% Bank Limit</span>
+            <span>100% Worst</span>
+          </div>
+        </div>
+        <div class="foir-result-badge">
+          <div class="foir-badge-chip" id="foir-risk-chip">—</div>
+        </div>
+        <div class="foir-advice" id="foir-advice-text">—</div>
+      </div>
+ 
+      <!-- BANK COMPARISON -->
+      <div class="bank-table-box">
+        <div class="bank-table-title">🏦 Bank-wise Eligibility Comparison</div>
+        <table class="bank-table" id="bank-table">
+          <thead>
+            <tr>
+              <th>Bank</th>
+              <th>FOIR</th>
+              <th>Rate</th>
+              <th>Max Eligibility</th>
+              <th>New EMI</th>
+            </tr>
+          </thead>
+          <tbody id="bank-table-body"></tbody>
+        </table>
+      </div>
+ 
+      <!-- TIPS -->
+      <div class="tips-box">
+        <div class="tips-title">💡 Eligibility Badhane Ke Tips</div>
+        <div class="tips-list" id="tips-list"></div>
+      </div>
+ 
+      <!-- CTA -->
+      <div class="cta-box">
+        <div class="cta-title">🚀 Apply Karein — Best Rate Guaranteed!</div>
+        <div class="cta-sub">CashEntry.in par 40+ banks compare karo — CIBIL Safe · Free · 30 Min Response</div>
+        <a href="https://cashentry.in/#apply" class="cta-btn">🚀 Free Apply Now</a>
+        <a href="https://wa.me/919660031171?text=Hello%20CashEntry.in%2C%20loan%20eligibility%20check%20karni%20hai" class="cta-btn wa" target="_blank">💬 WhatsApp Expert</a>
+      </div>
+ 
 
 <!-- DATA VAULT -->
 <section class="sec" id="vault">
