@@ -539,7 +539,7 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
     <li><a href="#calculators">Calculators</a></li>
     <li><a href="#vault">Data Vault</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#trust">Why Us</a></li><li><a href="#blog">Blog</a></li><li><a href="#contact">Contact</a></li>
+    <li><a href="#trust">Why Us</a></li><li><a href="#blog">Blog</a></li><li><a href="#calculators">Eligibility</a></li><li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#apply" class="nav-btn">Apply Free →</a>
 </nav>
@@ -735,6 +735,7 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
     <div class="calc-tab active" onclick="showCalc('emi',this)">🧮 EMI Calculator</div>
     <div class="calc-tab" onclick="showCalc('bt',this)">🔄 Balance Transfer Savings</div>
     <div class="calc-tab" onclick="showCalc('foir',this)">📊 FOIR Eligibility</div>
+    <div class="calc-tab" onclick="showCalc('eli',this)">🏆 Loan Eligibility</div>
   </div>
   <!-- EMI -->
   <div class="calc-panel active" id="calc-emi">
@@ -802,10 +803,93 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
           <div class="foir-bar-bg"><div class="foir-bar-fill" id="foir-bar"></div><div class="foir-bar-marker"></div></div>
           <div class="foir-label-row"><span>0% Best</span><span>50% Limit</span><span>100% Worst</span></div>
           <div class="lbl" id="foir-advice" style="margin-top:10px;font-size:11px;">—</div>
+           
         </div>
       </div>
     </div>
   </div>
+     <!-- calc-eli -->
+   <div class="calc-panel" id="calc-eli">
+  <div class="calc-card">
+    <div class="calc-title">🏆 Loan Eligibility Calculator</div>
+    <div class="calc-sub">Income, EMI, rate aur tenure se exact eligibility jaaniye!</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:12px;padding:16px;">
+        <div style="font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;margin-bottom:6px;">Monthly Income</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="eli-inc-val">₹50,000</div>
+        <input type="range" id="eli-inc" min="10000" max="500000" step="5000" value="50000" oninput="eliUpdate()" style="-webkit-appearance:none;width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(240,248,255,0.4);margin-top:4px;"><span>₹10K</span><span>₹5L</span></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:12px;padding:16px;">
+        <div style="font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;margin-bottom:6px;">Existing EMIs</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="eli-ex-val">₹8,000</div>
+        <input type="range" id="eli-ex" min="0" max="200000" step="1000" value="8000" oninput="eliUpdate()" style="-webkit-appearance:none;width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(240,248,255,0.4);margin-top:4px;"><span>₹0</span><span>₹2L</span></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:12px;padding:16px;">
+        <div style="font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;margin-bottom:6px;">Interest Rate</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="eli-rate-val">11.0% p.a.</div>
+        <input type="range" id="eli-rate" min="8" max="24" step="0.5" value="11" oninput="eliUpdate()" style="-webkit-appearance:none;width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(240,248,255,0.4);margin-top:4px;"><span>8%</span><span>24%</span></div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:12px;padding:16px;">
+        <div style="font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;margin-bottom:6px;">Tenure (Months)</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="eli-ten-val">36 months</div>
+        <input type="range" id="eli-ten" min="12" max="84" step="6" value="36" oninput="eliUpdate()" style="-webkit-appearance:none;width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(240,248,255,0.4);margin-top:4px;"><span>12M</span><span>84M</span></div>
+      </div>
+    </div>
+    <div style="margin-bottom:18px;">
+      <div style="font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;margin-bottom:10px;">Bank FOIR Policy</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;" id="eli-foir-btns">
+        <div onclick="setEF(50,this)" style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:10px;padding:10px;text-align:center;cursor:pointer;">
+          <div style="font-size:18px;font-weight:700;">50%</div>
+          <div style="font-size:9px;color:rgba(240,248,255,0.5);">SBI, PNB</div>
+        </div>
+        <div onclick="setEF(60,this)" style="background:rgba(13,142,207,0.12);border:2px solid #0d8ecf;border-radius:10px;padding:10px;text-align:center;cursor:pointer;" id="ef-active">
+          <div style="font-size:18px;font-weight:700;color:#64d2ff;">60%</div>
+          <div style="font-size:9px;color:rgba(240,248,255,0.5);">HDFC, ICICI ⭐</div>
+        </div>
+        <div onclick="setEF(70,this)" style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:10px;padding:10px;text-align:center;cursor:pointer;">
+          <div style="font-size:18px;font-weight:700;">70%</div>
+          <div style="font-size:9px;color:rgba(240,248,255,0.5);">Bajaj, Tata</div>
+        </div>
+      </div>
+      <input type="hidden" id="eli-foir" value="60">
+    </div>
+    <button class="calc-btn" onclick="calcEli()">🏆 Calculate Loan Eligibility →</button>
+    <div class="calc-result" id="eli-res">
+      <div style="background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(34,197,94,0.04));border:2px solid rgba(34,197,94,0.3);border-radius:16px;padding:24px;text-align:center;margin-bottom:16px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#86efac;font-weight:700;margin-bottom:6px;">✅ Maximum Loan Eligibility</div>
+        <div style="font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:#86efac;" id="eli-r-loan">—</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:6px;" id="eli-r-sub">—</div>
+        <div style="margin-top:10px;" id="eli-r-badge"></div>
+      </div>
+      <div class="result-grid">
+        <div class="result-item"><div class="result-val" id="eli-r-emi">—</div><div class="result-lbl">New EMI/month</div></div>
+        <div class="result-item"><div class="result-val" id="eli-r-maxemi">—</div><div class="result-lbl">Max EMI Allowed</div></div>
+        <div class="result-item"><div class="result-val" id="eli-r-avail">—</div><div class="result-lbl">Available EMI</div></div>
+        <div class="result-item"><div class="result-val" id="eli-r-foir">—</div><div class="result-lbl">Your FOIR %</div></div>
+        <div class="result-item"><div class="result-val" id="eli-r-int">—</div><div class="result-lbl">Total Interest</div></div>
+        <div class="result-item"><div class="result-val" id="eli-r-total">—</div><div class="result-lbl">Total Payable</div></div>
+      </div>
+      <div style="margin-top:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(13,142,207,0.1);border-radius:12px;overflow:hidden;">
+        <div style="padding:12px 16px;font-size:11px;font-weight:700;color:#64d2ff;border-bottom:1px solid rgba(13,142,207,0.1);">🏦 Bank-wise Comparison</div>
+        <table style="width:100%;border-collapse:collapse;" id="eli-bank-tbl">
+          <thead><tr style="background:rgba(13,142,207,0.1);">
+            <th style="padding:8px 12px;font-size:10px;color:#64d2ff;text-align:left;">Bank</th>
+            <th style="padding:8px 12px;font-size:10px;color:#64d2ff;text-align:left;">FOIR</th>
+            <th style="padding:8px 12px;font-size:10px;color:#64d2ff;text-align:left;">Rate</th>
+            <th style="padding:8px 12px;font-size:10px;color:#64d2ff;text-align:left;">Max Loan</th>
+            <th style="padding:8px 12px;font-size:10px;color:#64d2ff;text-align:left;">EMI</th>
+          </tr></thead>
+          <tbody id="eli-bank-body"></tbody>
+        </table>
+      </div>
+      <div style="background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.15);border-radius:12px;padding:16px;margin-top:16px;" id="eli-tips"></div>
+    </div>
+  </div>
+</div>
 </section>
 
 <!-- DATA VAULT -->
@@ -1419,7 +1503,90 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
     }
   });
 });
-
+   
+// ELIGIBILITY CALCULATOR
+let efVal=60;
+function setEF(v,el){
+  efVal=v;
+  document.getElementById('eli-foir').value=v;
+  document.querySelectorAll('#eli-foir-btns > div').forEach(b=>{
+    b.style.background='rgba(255,255,255,0.03)';
+    b.style.border='1px solid rgba(13,142,207,0.1)';
+    b.querySelector('div').style.color='#f0f8ff';
+  });
+  el.style.background='rgba(13,142,207,0.12)';
+  el.style.border='2px solid #0d8ecf';
+  el.querySelector('div').style.color='#64d2ff';
+}
+function eliUpdate(){
+  const i=parseInt(document.getElementById('eli-inc').value);
+  const e=parseInt(document.getElementById('eli-ex').value);
+  const r=parseFloat(document.getElementById('eli-rate').value);
+  const t=parseInt(document.getElementById('eli-ten').value);
+  document.getElementById('eli-inc-val').textContent=fmt(i);
+  document.getElementById('eli-ex-val').textContent=fmt(e);
+  document.getElementById('eli-rate-val').textContent=r.toFixed(1)+'% p.a.';
+  document.getElementById('eli-ten-val').textContent=t+' months';
+}
+function calcEli(){
+  const inc=parseInt(document.getElementById('eli-inc').value);
+  const ex=parseInt(document.getElementById('eli-ex').value);
+  const rate=parseFloat(document.getElementById('eli-rate').value);
+  const ten=parseInt(document.getElementById('eli-ten').value);
+  const foir=efVal;
+  const r=rate/(12*100);
+  const maxEMI=inc*foir/100;
+  const availEMI=Math.max(0,maxEMI-ex);
+  const maxLoan=availEMI>0?(r===0?availEMI*ten:availEMI*(Math.pow(1+r,ten)-1)/(r*Math.pow(1+r,ten))):0;
+  const newEMI=maxLoan>0?(r===0?maxLoan/ten:maxLoan*r*Math.pow(1+r,ten)/(Math.pow(1+r,ten)-1)):0;
+  const totalPay=newEMI*ten;
+  const totalInt=totalPay-maxLoan;
+  const myFoir=inc>0?((ex+newEMI)/inc*100):0;
+  document.getElementById('eli-r-loan').textContent=fmt(maxLoan);
+  document.getElementById('eli-r-sub').textContent='At '+rate+'% for '+ten+' months | New EMI: '+fmt(newEMI)+'/mo';
+  const bg=document.getElementById('eli-r-badge');
+  if(maxLoan>=500000){bg.innerHTML='<span style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);color:#86efac;padding:5px 16px;border-radius:100px;font-size:12px;font-weight:700;">✅ Strong Eligibility</span>';}
+  else if(maxLoan>=100000){bg.innerHTML='<span style="background:rgba(249,115,22,0.2);border:1px solid rgba(249,115,22,0.3);color:#fdba74;padding:5px 16px;border-radius:100px;font-size:12px;font-weight:700;">⚠️ Moderate Eligibility</span>';}
+  else{bg.innerHTML='<span style="background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;padding:5px 16px;border-radius:100px;font-size:12px;font-weight:700;">❌ Low — Reduce EMIs</span>';}
+  document.getElementById('eli-r-emi').textContent=fmt(newEMI);
+  document.getElementById('eli-r-maxemi').textContent=fmt(maxEMI);
+  document.getElementById('eli-r-avail').textContent=fmt(availEMI);
+  document.getElementById('eli-r-foir').textContent=myFoir.toFixed(1)+'%';
+  document.getElementById('eli-r-int').textContent=fmt(totalInt);
+  document.getElementById('eli-r-total').textContent=fmt(totalPay);
+  const banks=[
+    {n:'HDFC Bank',f:60,r:10.5},{n:'ICICI Bank',f:60,r:10.75},
+    {n:'Bajaj Finserv',f:70,r:11.0},{n:'Tata Capital',f:70,r:10.99},
+    {n:'SBI',f:50,r:11.5},{n:'Kotak Bank',f:60,r:10.99},
+    {n:'Axis Bank',f:60,r:11.25},{n:'IDFC First',f:65,r:10.75}
+  ];
+  const bd=banks.map(b=>{
+    const br=b.r/(12*100);
+    const bAvail=Math.max(0,inc*b.f/100-ex);
+    const bLoan=bAvail>0?(br===0?bAvail*ten:bAvail*(Math.pow(1+br,ten)-1)/(br*Math.pow(1+br,ten))):0;
+    const bEMI=bLoan>0?(br===0?bLoan/ten:bLoan*br*Math.pow(1+br,ten)/(Math.pow(1+br,ten)-1)):0;
+    return{...b,loan:bLoan,emi:bEMI};
+  }).sort((a,b)=>b.loan-a.loan);
+  const tb=document.getElementById('eli-bank-body');
+  tb.innerHTML='';
+  bd.forEach((b,i)=>{
+    const tr=document.createElement('tr');
+    tr.style.borderTop='1px solid rgba(255,255,255,0.04)';
+    if(i===0)tr.style.background='rgba(34,197,94,0.05)';
+    tr.innerHTML='<td style="padding:9px 12px;font-size:12px;color:#f0f8ff;font-weight:600;">'+b.n+(i===0?'<span style="background:#22c55e;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;margin-left:6px;">BEST</span>':'')+'</td><td style="padding:9px 12px;font-size:12px;color:rgba(240,248,255,0.55);">'+b.f+'%</td><td style="padding:9px 12px;font-size:12px;color:rgba(240,248,255,0.55);">'+b.r+'%</td><td style="padding:9px 12px;font-size:12px;'+(i===0?'color:#86efac;font-weight:700;':'color:rgba(240,248,255,0.55);')+'">'+fmt(b.loan)+'</td><td style="padding:9px 12px;font-size:12px;color:rgba(240,248,255,0.55);">'+fmt(b.emi)+'/mo</td>';
+    tb.appendChild(tr);
+  });
+  let tips='<div style="font-size:12px;font-weight:700;color:#e8c96a;margin-bottom:10px;">💡 Eligibility Badhane Ke Tips</div>';
+  if(ex>inc*0.3)tips+='<div style="font-size:12px;color:rgba(240,248,255,0.55);margin-bottom:7px;">💳 Existing EMIs zyada hain — kuch loans pehle close karein.</div>';
+  if(rate>14)tips+='<div style="font-size:12px;color:rgba(240,248,255,0.55);margin-bottom:7px;">🔄 Rate high hai — Balance Transfer se rate kam karwao.</div>';
+  if(ten<36)tips+='<div style="font-size:12px;color:rgba(240,248,255,0.55);margin-bottom:7px;">📅 Tenure badhao — EMI kam hogi, max loan badh jayega.</div>';
+  tips+='<div style="font-size:12px;color:rgba(240,248,255,0.55);margin-bottom:7px;">🛡️ CashEntry.in par apply karo — CIBIL Safe, score safe rahega.</div>';
+  tips+='<div style="font-size:12px;color:rgba(240,248,255,0.55);">👨‍👩‍👧 Co-applicant add karo — combined income se eligibility badh sakti hai.</div>';
+  document.getElementById('eli-tips').innerHTML=tips;
+  document.getElementById('eli-res').classList.add('show');
+}
+eliUpdate();
+   
 // Scroll animations
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
