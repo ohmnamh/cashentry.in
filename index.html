@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CashEntry.in | Zaroorat Aapki. Zimmedaari Hamari. | Best Loan Deals India</title>
+<title>CashEntry.in | Zaroorat Aapki. Zimmedaari Hamari. | Best Loan Deals India</title> 
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta name="description" content="Secure the lowest interest rates on personal loans, business loans, and balance transfers. CashEntry.in serves top Indian hubs including Mumbai, Delhi, Bangalore, Hyderabad, and Jaipur. Calculate your EMI & eligibility instantly online.">
 <meta name="keywords" content="cashentry, personal loan mumbai, business loan delhi, loan compare bangalore, flexi loan hyderabad, lowest interest rate chennai, EMI calculator pune, FOIR calculator kolkata, loan dsa jaipur, instant business loan ahmedabad, finance consultant lucknow, online loan application india">
 <meta name="robots" content="index, follow">
@@ -158,7 +160,7 @@ body{font-family:'Sora',sans-serif;background:var(--dark);color:var(--white);ove
 /* NAV */
 nav{position:fixed;top:3px;left:0;right:0;z-index:1000;background:rgba(7,21,35,0.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
 .logo-wrap{display:flex;align-items:center;text-decoration:none;gap:4px;}
-.logo-img{height:46px;width:auto;object-fit:contain;}
+.logo-img{height:44px; width:auto; max-width:180px; object-fit:contain;}
 .nav-links{display:flex;gap:22px;list-style:none;}
 .nav-links a{color:var(--gray);text-decoration:none;font-size:12px;font-weight:500;transition:color 0.3s;}
 .nav-links a:hover{color:var(--blue);}
@@ -531,7 +533,11 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
 .pms-label{font-size:13px;color:rgba(240,248,255,0.55);margin-top:6px;}
 /* RESPONSIVE */
 @media(max-width:768px){
+   
   .hero{grid-template-columns:1fr;padding-top:80px;}
+   .prepay-compare-grid{grid-template-columns:1fr;}
+   .prepay-saving-amount{font-size:32px;}
+   .pms-number{font-size:36px;}
   .hero h1{font-size:28px;}
   .hero-sub{font-size:13px;}
   .hero-stats{gap:20px;}
@@ -561,6 +567,14 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
   .modal{padding:20px;}
   .hero-btns{flex-direction:column;}
   .btn-blue,.btn-ghost{width:100%;justify-content:center;}
+  .prepay-compare-grid{grid-template-columns:1fr;}
+  .prepay-saving-amount{font-size:32px;}
+  .pms-number{font-size:36px;}
+  .prepay-col{padding:16px;}
+  .prepay-stat-row{font-size:11px;}
+  .prepay-bar-section{padding:14px;}
+  .prepay-result-hero{padding:20px;}
+  .prepay-months-saved{padding:16px;}
 }
 </style>
 </head>
@@ -865,7 +879,7 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(13,142,207,0.1);border-radius:12px;padding:16px;">
         <div style="font-size:10px;font-weight:700;color:#64d2ff;text-transform:uppercase;margin-bottom:6px;">Loan Amount</div>
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;" id="pp-amt-val">₹5,00,000</div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(16px,4vw,22px);font-weight:700;margin-bottom:8px;" id="pp-amt-val">₹5,00,000</div>
         <input type="range" id="pp-amt" min="50000" max="5000000" step="50000" value="500000" oninput="ppUpdate()" style="-webkit-appearance:none;width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;outline:none;cursor:pointer;">
         <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(240,248,255,0.4);margin-top:4px;"><span>₹50K</span><span>₹50L</span></div>
       </div>
@@ -899,7 +913,7 @@ footer{background:rgba(4,10,20,0.95);border-top:1px solid rgba(13,142,207,0.15);
         <div class="pms-number" id="pp-months-saved">—</div>
         <div class="pms-label">Months Earlier — Loan Khatam Hoga! 🎉</div>
       </div>
-      <div class="prepay-compare-grid">
+      <div class="prepay-compare-grid" style="overflow:hidden;word-break:break-word;" >
         <div class="prepay-col prepay-col-without">
           <div class="prepay-col-label">❌ Without Extra Payment</div>
           <div class="prepay-stat-row"><span class="prepay-stat-label">Monthly EMI</span><span class="prepay-stat-val" id="pp-emi-normal">—</span></div>
