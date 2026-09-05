@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APP Paint & Chemical — Shipping Label Generator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js"></script>
 <style>
   :root{
     --ink:#0f1a12;
@@ -314,7 +314,11 @@ const FROM = {
   line1: "148 Gotam Marg, Kasturba Nagar, Nirman Nagar",
   line2: "Jaipur, Rajasthan — 302019"
 };
-const LOG_URL = "https://script.google.com/macros/s/AKfycbxX6VOws5L6nnXXJ4282gZcGudlhHXn5X49Yky-8cK5lIOAYaAzA1Hw6gjNbtZpFmE8/exec";
+
+/* ============================================================
+
+   ============================================================ */
+const LOG_URL = "https://script.google.com/macros/s/AKfycbxSqThi-79I3e_DmsCyAAFIJEmFOnGC6O4hLDX_nGTnb1x9g97-4yC3dHmyh00fQCo-/exec";
 
 function logGeneration(action){
   if (!LOG_URL || LOG_URL.indexOf("PASTE_YOUR") !== -1) return;
@@ -336,18 +340,26 @@ ids.forEach(id=>{
 });
 
 let qr = null;
+function qrSafeText(text){
+  // The qrcodejs library breaks on some special characters (em-dash, curly
+  // quotes, etc.) — swap them for plain ASCII before handing text to it.
+  return text
+    .replace(/—/g, "-")
+    .replace(/[^\x00-\x7F]/g, "");
+}
 function renderQR(text){
   const el = document.getElementById("qrcode");
+  const safe = qrSafeText(text);
   if (!qr){
     qr = new QRCode(el, {
-      text: text || " ",
+      text: safe || " ",
       width: 112,
       height: 112,
-      correctLevel: QRCode.CorrectLevel.M
+      correctLevel: QRCode.CorrectLevel.L
     });
   } else {
     qr.clear();
-    qr.makeCode(text || " ");
+    qr.makeCode(safe || " ");
   }
 }
 
@@ -365,7 +377,11 @@ function render(){
   document.getElementById("out-line4").textContent = line4parts;
   document.getElementById("out-phone").textContent = v("phone") ? ("Contact: " + v("phone")) : "";
   document.getElementById("out-date").textContent = new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'});
-  renderQR(buildText());
+  try{
+    renderQR(buildText());
+  }catch(err){
+    console.warn("QR render failed, leaving previous code in place:", err);
+  }
 }
 
 function clearForm(){
