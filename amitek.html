@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APP Paint & Chemical — Shipping Label Generator</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   :root{
-    --ink:#1c2b22;
+    --ink:#0f1a12;
     --paper:#f6f3ea;
     --card:#ffffff;
     --rust:#b5502c;
     --rust-dark:#8f3d20;
     --line:#d8cfb8;
-    --muted:#6f6a5a;
+    --muted:#4a4636;
     --stamp:#2f5137;
   }
   *{box-sizing:border-box;}
@@ -155,29 +156,33 @@
     font-weight:bold;
     margin-bottom:6px;
   }
-  .block-name{font-size:14px;font-weight:bold;margin-bottom:3px;}
-  .block-line{font-size:12.5px;line-height:1.6;color:var(--ink);word-break: break-word;}
-  .block-line.muted{color:var(--muted);font-size:11px;}
+  .block-name{font-size:14px;font-weight:bold;margin-bottom:3px;color:var(--ink);}
+  .block-line{font-size:12.5px;line-height:1.6;color:var(--ink);word-break: break-word;font-weight:600;}
+  .block-line.muted{color:var(--muted);font-size:11px;font-weight:600;}
 
   .ship-to .block-name{font-size:15px;}
   .ship-to{background:#fbf7ea;}
 
   .foot{
-    padding:8px 16px 14px;
+    padding:10px 16px 14px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     font-size:9px;
     color:var(--muted);
     letter-spacing:0.5px;
+    gap:12px;
   }
-  .barcode{
-    height:24px;
-    background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px);
-    flex:1;
-    margin-right:12px;
-    opacity:0.85;
+  #qrcode{
+    flex-shrink:0;
+    line-height:0;
   }
+  #qrcode img, #qrcode canvas{
+    width:56px;
+    height:56px;
+    display:block;
+  }
+  .foot-meta{flex:1;text-align:right;font-weight:bold;color:var(--muted);}
 
   @media print{
     body{background:#fff;padding:0;}
@@ -259,11 +264,11 @@
       </div>
 
       <div class="btns">
-        <button class="btn-print" onclick="window.print()">🖨 Print Label / PDF</button>
+        <button class="btn-print" onclick="printLabel()">🖨 Print Label / PDF</button>
         <button class="btn-wa" onclick="sendWhatsApp()">✆ Send to WhatsApp</button>
         <button class="btn-clear" onclick="clearForm()">Clear Fields</button>
       </div>
-      <p class="hint">Print opens your system dialog (select "Save as PDF" for digital copies). WhatsApp shares the label snapshot directly on mobile devices.</p>
+      <p class="hint">Print opens your system dialog (select "Save as PDF" for digital copies). WhatsApp shares the label snapshot directly on mobile devices. Scan the QR on the label to pull up the full address.</p>
     </div>
 
     <div class="label-outer">
@@ -295,8 +300,8 @@
         </div>
 
         <div class="foot">
-          <div class="barcode"></div>
-          <span id="out-date"></span>
+          <div id="qrcode"></div>
+          <span class="foot-meta" id="out-date"></span>
         </div>
       </div>
     </div>
@@ -309,12 +314,42 @@ const FROM = {
   line1: "148 Gotam Marg, Kasturba Nagar, Nirman Nagar",
   line2: "Jaipur, Rajasthan — 302019"
 };
+const LOG_URL = "https://script.google.com/macros/s/AKfycbxX6VOws5L6nnXXJ4282gZcGudlhHXn5X49Yky-8cK5lIOAYaAzA1Hw6gjNbtZpFmE8/exec";
+
+function logGeneration(action){
+  if (!LOG_URL || LOG_URL.indexOf("PASTE_YOUR") !== -1) return;
+  const v = id => document.getElementById(id).value.trim();
+  const params = new URLSearchParams({
+    action: action,
+    consignee: v("consignee"),
+    city: v("city"),
+    state: v("state"),
+    pin: v("pin")
+  });
+  new Image().src = LOG_URL + "?" + params.toString();
+}
 
 const ids = ["fromAttn","fromPhone","consignee","building","road","locality","city","district","state","pin","phone"];
 ids.forEach(id=>{
   const el = document.getElementById(id);
   el.addEventListener("input", render);
 });
+
+let qr = null;
+function renderQR(text){
+  const el = document.getElementById("qrcode");
+  if (!qr){
+    qr = new QRCode(el, {
+      text: text || " ",
+      width: 112,
+      height: 112,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } else {
+    qr.clear();
+    qr.makeCode(text || " ");
+  }
+}
 
 function render(){
   const v = id => document.getElementById(id).value.trim();
@@ -330,6 +365,7 @@ function render(){
   document.getElementById("out-line4").textContent = line4parts;
   document.getElementById("out-phone").textContent = v("phone") ? ("Contact: " + v("phone")) : "";
   document.getElementById("out-date").textContent = new Date().toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'});
+  renderQR(buildText());
 }
 
 function clearForm(){
@@ -341,16 +377,16 @@ function clearForm(){
 function buildText(){
   const v = id => document.getElementById(id).value.trim();
   let lines = [];
-  lines.push("*Shipping Label — APP Paint & Chemical Pvt. Ltd.*");
+  lines.push("Shipping Label — APP Paint & Chemical Pvt. Ltd.");
   lines.push("");
-  lines.push("*From:*");
+  lines.push("From:");
   lines.push(FROM.company);
   lines.push(FROM.line1);
   lines.push(FROM.line2);
   const attnParts = [v("fromAttn") ? ("Attn: " + v("fromAttn")) : "", v("fromPhone")].filter(Boolean);
   if (attnParts.length) lines.push(attnParts.join(" · "));
   lines.push("");
-  lines.push("*Ship To:*");
+  lines.push("Ship To:");
   if (v("consignee")) lines.push(v("consignee"));
   const l1 = [v("building"), v("road")].filter(Boolean).join(", ");
   if (l1) lines.push(l1);
@@ -363,8 +399,22 @@ function buildText(){
   return lines.join("\n");
 }
 
+function buildWhatsAppText(){
+  // Bold markers for WhatsApp only (kept separate so the QR code holds clean plain text)
+  return buildText()
+    .replace("Shipping Label — APP Paint & Chemical Pvt. Ltd.", "*Shipping Label — APP Paint & Chemical Pvt. Ltd.*")
+    .replace("From:", "*From:*")
+    .replace("Ship To:", "*Ship To:*");
+}
+
+function printLabel(){
+  logGeneration("print");
+  window.print();
+}
+
 async function sendWhatsApp(){
-  const text = buildText();
+  logGeneration("whatsapp");
+  const text = buildWhatsAppText();
   try{
     const canvas = await html2canvas(document.getElementById("label"), {backgroundColor:"#fffdf8", scale:2});
     const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
